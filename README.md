@@ -1,8 +1,8 @@
-# TypeScript Make Block-Chain
+# TypeScript With Block-Chain
 ## Softerware
  - yarn init
- - yarn global add typescript
- 
+ - yarn global add typescript, yarn add typescript 
+ - yarn add tsc-watch --dev 
  - - -
  ## tsconfig.json
  <pre>
@@ -15,7 +15,6 @@
     "include": ["index.ts"],    // 컴파일 과정에서 포함할 파일의 배열
     "exclude": ["node_modules"] // node_modules 제외
 }
-
  </pre>
  - - -
 ## RUN
