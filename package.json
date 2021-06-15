@@ -1,0 +1,13 @@
+{
+  "name": "chain-typescript",
+  "version": "1.0.0",
+  "description": "Typescript by making a Blockchain with it",
+  "main": "index.js",
+  "repository": "https://github.com/jrock30/blockchain-typescript",
+  "author": "Jrock30 <jrg8989@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "prestart": "tsc"
+  }
+}
