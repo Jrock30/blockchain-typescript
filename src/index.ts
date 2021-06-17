@@ -1,58 +1,49 @@
-/**
- * interface 는 javascipt로 컴파일 하면 따로 보이거나 하지 않는다. object 만 보임
- * 이 것을 class 로 사용하게 되면 class 또한 컴파일이 되어 js 에 보인다.
- * 
- * 인터페이스를 사용하면 ts 측면에서는 좀 더 안전하다.
- * react.js, node.js 등등 을 사용하게 되면 클래스를 사용하는게 나을 수 있다.
- * 클래스의 public, private 접근제어자는 js 로 컴파일 되지 않는다. 없는 기능이다.
- */
-interface Human {
-    name: string;
-    age: number;
-    gender: string;
-}
+import * as Crypto from "crypto-js";
 
-class Human2 {
-    public name: string;
-    public age: number;
-    public gender: string;
-    constructor(name:string, age:number, gender?:string) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+class Block {
+public index: number;
+    public hash: string;
+    public previousHash: string;
+    public data: string;
+    public timestamp: number;
 
+    // static 함수 자바처럼 클래스를 선언하지 않고 바로 부를 수 있음.
+    static calculateBlockHash = (
+        index: number, 
+        previousHash: string, 
+        timestamp: number, 
+        data: string
+        ): string => Crypto.SHA256(index + previousHash + timestamp + data).toString();
+
+    constructor(
+        index: number,
+        hash: string,
+        previousHash: string,
+        data: string,
+        timestamp: number
+    ) {
+        this.index = index;
+        this.hash = hash;
+        this.previousHash = previousHash;
+        this.data = data;
+        this.timestamp = timestamp;
     }
 }
 
-const person = {
-    name: "Jrock30",
-    gender: "male",
-    age: 20
-}
+const genesisBlock: Block = new Block(0, "123432432", "", "Hello", 123456)
 
-const jrock = new Human2("Jrock", 23);
+let blockchain: [Block] = [genesisBlock];
 
-const name = "jrock",
-    age = 21,
-    gender = "male";
+console.log(blockchain);
 
-// 아규먼트 뒤에 ? 를 붙이면 사용이 필수적이 아니다. , : {void} 리턴 타입.
-// const sayHi = (name, age, gender?) => {
-const sayHiOne = (name: string, age: number, gender: string): void => {
-    console.log(`Hello ${name}, you are a ${age}, ${gender}!`);
-};
+// 블록체인 배열
+const getBlockchain = () : Block[] => blockchain;
 
-// interface
-const sayHiTwo = (person: Human): void => {
-    console.log(`Hello ${person.name}, you are a ${person.age}, ${person.gender}!`);
-};
+console.log(getBlockchain());
+// 블록체인 안에서 가장 최근 것
+const getLatestBlock = () : Block => getBlockchain[blockchain.length - 1];
 
-// class
-const sayHiThree = (person: Human2): void => {
-    console.log(`Hello ${person.name}, you are a ${person.age}, ${person.gender}!`);
-};
+const getNewTimeStamp = () : number => Math.round(new Date().getTime() / 1000);
 
-sayHiOne(name, age, gender);
-sayHiTwo(person);
-sayHiThree(jrock)
+
 export {};

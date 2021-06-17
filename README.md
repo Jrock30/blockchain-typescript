@@ -3,6 +3,7 @@
  - yarn init
  - yarn global add typescript, yarn add typescript 
  - yarn add tsc-watch --dev 
+ - yarn add crypto-js
  - - -
  ## tsconfig.json
  <pre>
