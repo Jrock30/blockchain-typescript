@@ -49,7 +49,7 @@ const createNewBlock = (data:string) : Block => {
     const previosBlock: Block = getLatestBlock();
     const newIndex: number = previosBlock.index + 1;
     const newTimeStamp: number = getNewTimeStamp();
-    const nextHash: string = Block.calculateBlockHash(
+    const newHash: string = Block.calculateBlockHash(
         newIndex,
         previosBlock.hash,
         newTimeStamp,
@@ -58,10 +58,13 @@ const createNewBlock = (data:string) : Block => {
     const newBlock: Block = new Block(
         newIndex, 
         newHash,
-        previousHash.hash,
+        previosBlock.hash,
         data,
         newTimeStamp
     );
+    return newBlock;
 }
+
+console.log(createNewBlock("hello"), createNewBlock("bye bye "));
 
 export {};
